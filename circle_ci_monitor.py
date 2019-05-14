@@ -49,11 +49,11 @@ def bootstrap():
         return None
 
     lights = Stoplight(states, gpio)
-    print(lights.controller)
     main_loop(seconds_delay=seconds_delay,
               branches=branches,
               token=token,
-              repos=repos)
+              repos=repos,
+              lights=lights)
 
 
 def get_statuses(**kwargs):
@@ -96,7 +96,18 @@ def get_statuses(**kwargs):
 
 def status_to_state(statuses):
     pass
+    state = ""
     # this is assuming 1, but built to support multiple
+    for status_object in statuses:
+        print(status_object)
+        status = status_object.get("status")
+        if status == "success" or status == "canceled":
+            state = "good"
+        elif status == "running" or status == "queued" or status == "not_running":
+            state = "building"
+        elif status == "failed" or status == "timedout":
+            state = "broken"
+    return state
 
 
 def main_loop(**kwargs):
@@ -105,6 +116,7 @@ def main_loop(**kwargs):
     branches = kwargs.get('branches')
     token = kwargs.get('token')
     repos = kwargs.get("repos")
+    lights = kwargs.get("lights")
     url = ''.join(
         ("https://circleci.com/api/v1.1/projects?circle-token=", token))
     print(url)
@@ -113,6 +125,8 @@ def main_loop(**kwargs):
             url=url, repos=repos, branches=branches)
 
         print(current_statuses)
+        state = status_to_state(current_statuses)
+        lights.assert_state(state)
         # pass statuses to the pi to handle it
         sleep(seconds_delay)
 
