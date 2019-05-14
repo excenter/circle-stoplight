@@ -1,5 +1,5 @@
 from time import sleep
-from gipiozero import LED
+from gpiozero import LED
 
 
 class Stoplight:

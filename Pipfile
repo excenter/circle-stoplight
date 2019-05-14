@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 requests = "*"
-gipiozero = "*"
+gpiozero = "*"
 
 [requires]
 python_version = "3.7"
