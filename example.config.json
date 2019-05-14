@@ -1,0 +1,11 @@
+{
+    "CircleCiToken": "YOUR_CIRCLE_TOKEN",
+    "timeDelay": 30,
+    "branches": [
+        "develop",
+        "master"
+    ],
+    "repos": [
+        "stoplight"
+    ]
+}
