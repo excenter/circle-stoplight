@@ -2,10 +2,15 @@
     "CircleCiToken": "YOUR_CIRCLE_TOKEN",
     "timeDelay": 30,
     "branches": [
-        "develop",
         "master"
     ],
     "repos": [
         "stoplight"
-    ]
+    ],
+    "gpio": {
+        "buzzer": 26,
+        "green": 19,
+        "yellow": 13,
+        "red": 6
+    }
 }

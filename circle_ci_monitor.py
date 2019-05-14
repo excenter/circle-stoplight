@@ -2,10 +2,12 @@ import requests
 import json
 import os
 from time import sleep
+from stoplight import Stoplight
 
 
-def configErrorHelper():
+def configErrorHelper(missingConfig):
     print("ERROR: a required config is missing, please make sure you have a complete config.json")
+    print(missingConfig)
     # TODO what else would be helpful here? leave a github issue if you have suggestions. #SUG-1
 
 
@@ -24,16 +26,30 @@ def bootstrap():
         return None
     branches = config.get("branches")
     if not branches:
-        configErrorHelper()
+        configErrorHelper("branches")
         return None
     seconds_delay = config.get("timeDelay")
     if not seconds_delay:
-        configErrorHelper()
+        configErrorHelper("timeDelay")
         return None
+
     repos = config.get("repos")
     if not repos:
-        configErrorHelper()
+        configErrorHelper("repos")
         return None
+
+    gpio = config.get("gpio")
+    if not gpio:
+        configErrorHelper("gpio")
+        return None
+
+    states = config.get("states")
+    if not states:
+        configErrorHelper("states")
+        return None
+
+    lights = Stoplight(states, gpio)
+    print(lights.controller)
     main_loop(seconds_delay=seconds_delay,
               branches=branches,
               token=token,
@@ -78,6 +94,11 @@ def get_statuses(**kwargs):
     return current_statuses
 
 
+def status_to_state(statuses):
+    pass
+    # this is assuming 1, but built to support multiple
+
+
 def main_loop(**kwargs):
     # could this be not, kwarged... probably. but I did it anyway!
     seconds_delay = kwargs.get('seconds_delay')
@@ -92,6 +113,7 @@ def main_loop(**kwargs):
             url=url, repos=repos, branches=branches)
 
         print(current_statuses)
+        # pass statuses to the pi to handle it
         sleep(seconds_delay)
 
 
