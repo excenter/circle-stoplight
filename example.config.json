@@ -12,5 +12,27 @@
         "green": 19,
         "yellow": 13,
         "red": 6
+    },
+    "states": {
+        "good": {
+            "green": true,
+            "red": false,
+            "yellow": false
+        },
+        "broken": {
+            "green": false,
+            "red": true,
+            "yellow": false
+        },
+        "building": {
+            "green": false,
+            "red": false,
+            "yellow": true
+        },
+        "null": {
+            "green": false,
+            "red": false,
+            "yellow": false
+        }
     }
 }
