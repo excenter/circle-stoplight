@@ -3,6 +3,7 @@ import json
 import os
 from time import sleep
 from stoplight import Stoplight
+import threading
 
 
 def configErrorHelper(missingConfig):
@@ -120,15 +121,29 @@ def main_loop(**kwargs):
     url = ''.join(
         ("https://circleci.com/api/v1.1/projects?circle-token=", token))
     print(url)
+    blink_thread = threading.Thread(
+        target=lights.blink, args=("green", 0.75, 60))
+    previous_state = "good"
+
     while True:
         current_statuses = get_statuses(
             url=url, repos=repos, branches=branches)
 
         print(current_statuses)
         state = status_to_state(current_statuses)
-        lights.assert_state(state)
+
+        if previous_state != state and state == "good":
+            print("about to start thread")
+            blink_thread.start()
+        if not blink_thread.is_alive():
+            lights.assert_state(state)
         # pass statuses to the pi to handle it
         sleep(seconds_delay)
+        previous_state = state
 
 
-bootstrap()
+while True:
+    try:
+        bootstrap()
+    except:
+        print("blew up, trying again")
