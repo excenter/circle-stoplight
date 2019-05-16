@@ -134,6 +134,7 @@ def main_loop(**kwargs):
 
         if previous_state != state and state == "good":
             print("about to start thread")
+            lights.assert_state("null")
             blink_thread.start()
         if not blink_thread.is_alive():
             lights.assert_state(state)

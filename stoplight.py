@@ -49,6 +49,7 @@ class Stoplight:
             print("pin OFF")
             self.controll_pin(pin, self.OFF)
             sleep(interval)
+        self.controll_pin(pin, self.ON)
 
     def assert_state(self, state):
         for key in self.states[state]:
