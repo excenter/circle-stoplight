@@ -28,7 +28,7 @@ class Stoplight:
                 sleep(2)
         self.assert_state("null")
 
-    def controll_pin(self, pin, instruction):
+    def control_pin(self, pin, instruction):
         if instruction:
             if not self.fakeGpio:
                 self.controller[pin].on()
@@ -44,22 +44,16 @@ class Stoplight:
         oscilations = duration/(interval * 2)
         for i in range(int(oscilations)):
             print("pin ON")
-            self.controll_pin(pin, self.ON)
+            self.control_pin(pin, self.ON)
             sleep(interval)
             print("pin OFF")
-            self.controll_pin(pin, self.OFF)
+            self.control_pin(pin, self.OFF)
             sleep(interval)
-        self.controll_pin(pin, self.ON)
+        self.control_pin(pin, self.ON)
 
     def assert_state(self, state):
         for key in self.states[state]:
             if self.states[state][key]:
-                if not self.fakeGpio:
-                    self.controller[key].on()
-                else:
-                    print("just turned on GPIO " + str(self.controller[key]))
+                self.control_pin(key, self.ON)
             else:
-                if not self.fakeGpio:
-                    self.controller[key].off()
-                else:
-                    print("just turned off GPIO " + str(self.controller[key]))
+                self.control_pin(key, self.OFF)
