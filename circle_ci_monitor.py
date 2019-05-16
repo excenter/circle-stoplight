@@ -122,7 +122,7 @@ def main_loop(**kwargs):
         ("https://circleci.com/api/v1.1/projects?circle-token=", token))
     print(url)
     blink_thread = threading.Thread(
-        target=lights.blink, args=("green", 0.75, 60))
+        target=lights.blink, args=("green", 0.75, 30))
     previous_state = "good"
 
     while True:
