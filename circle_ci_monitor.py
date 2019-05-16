@@ -22,7 +22,7 @@ def bootstrap():
 
     token = config.get("CircleCiToken")
     if not token:
-        configErrorHelper()
+        configErrorHelper("token")
         return None
     branches = config.get("branches")
     if not branches:
@@ -42,13 +42,13 @@ def bootstrap():
     if not gpio:
         configErrorHelper("gpio")
         return None
-
+    fakeGpio = config.get("fakeGpio")
     states = config.get("states")
     if not states:
         configErrorHelper("states")
         return None
 
-    lights = Stoplight(states, gpio)
+    lights = Stoplight(states, gpio, fakeGpio)
     main_loop(seconds_delay=seconds_delay,
               branches=branches,
               token=token,
