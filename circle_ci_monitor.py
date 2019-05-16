@@ -13,7 +13,7 @@ def configErrorHelper(missingConfig):
 
 
 def bootstrap():
-    # initialize the variables
+    # read config file
     try:
         with open('config.json') as json_file:
             config = json.load(json_file)
@@ -21,35 +21,40 @@ def bootstrap():
         print("AN ERROR HAS OCCURRED READING THE CONFIG")
         return None
 
-    token = config.get("CircleCiToken")
-    if not token:
-        configErrorHelper("token")
-        return None
-    branches = config.get("branches")
-    if not branches:
-        configErrorHelper("branches")
-        return None
-    seconds_delay = config.get("timeDelay")
-    if not seconds_delay:
-        configErrorHelper("timeDelay")
-        return None
+    # initialize the config variables
+    if True:
+        token = config.get("CircleCiToken")
+        if not token:
+            configErrorHelper("token")
+            return None
+        branches = config.get("branches")
+        if not branches:
+            configErrorHelper("branches")
+            return None
+        seconds_delay = config.get("timeDelay")
+        if not seconds_delay:
+            configErrorHelper("timeDelay")
+            return None
 
-    repos = config.get("repos")
-    if not repos:
-        configErrorHelper("repos")
-        return None
+        repos = config.get("repos")
+        if not repos:
+            configErrorHelper("repos")
+            return None
 
-    gpio = config.get("gpio")
-    if not gpio:
-        configErrorHelper("gpio")
-        return None
-    fakeGpio = config.get("fakeGpio")
-    states = config.get("states")
-    if not states:
-        configErrorHelper("states")
-        return None
+        gpio = config.get("gpio")
+        if not gpio:
+            configErrorHelper("gpio")
+            return None
+        fakeGpio = config.get("fakeGpio")
+        states = config.get("states")
+        if not states:
+            configErrorHelper("states")
+            return None
 
+    # initialize the stoplight class
     lights = Stoplight(states, gpio, fakeGpio)
+
+    # enter the main loop
     main_loop(seconds_delay=seconds_delay,
               branches=branches,
               token=token,
