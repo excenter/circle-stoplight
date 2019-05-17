@@ -126,22 +126,23 @@ def main_loop(**kwargs):
     url = ''.join(
         ("https://circleci.com/api/v1.1/projects?circle-token=", token))
     print(url)
-    blink_thread = threading.Thread(
-        target=lights.blink, args=("green", 0.75, 30))
+    # blink_thread = threading.Thread(
+    #     target=lights.blink, args=("green", 0.75, 15))
     previous_state = "null"
 
     while True:
         current_statuses = get_statuses(
             url=url, repos=repos, branches=branches)
 
-        print(current_statuses)
+        # print(current_statuses)
         state = status_to_state(current_statuses)
 
         if previous_state != state and state == "good":
             print("about to start thread")
             lights.assert_state("null")
-            blink_thread.start()
-        if not blink_thread.is_alive():
+            lights.blink("green", 0.75, 15)
+            # blink_thread.start()
+        else:
             lights.assert_state(state)
         # pass statuses to the pi to handle it
         sleep(seconds_delay)
