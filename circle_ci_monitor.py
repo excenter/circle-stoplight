@@ -128,7 +128,7 @@ def main_loop(**kwargs):
     print(url)
     blink_thread = threading.Thread(
         target=lights.blink, args=("green", 0.75, 30))
-    previous_state = "good"
+    previous_state = "null"
 
     while True:
         current_statuses = get_statuses(
