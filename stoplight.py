@@ -33,12 +33,12 @@ class Stoplight:
             if not self.fakeGpio:
                 self.controller[pin].on()
             else:
-                print("just turned on GPIO " + str(self.controller[pin]))
+                print("GPIO " + f'{self.controller[pin]:02}' + " 🌕 " + pin)
         else:
             if not self.fakeGpio:
                 self.controller[pin].off()
             else:
-                print("just turned off GPIO " + str(self.controller[pin]))
+                print("GPIO " + f'{self.controller[pin]:02}' + " 🌑 " + pin)
 
     def blink(self, pin, interval, duration):
         oscilations = duration/(interval * 2)
