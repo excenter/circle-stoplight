@@ -21,7 +21,7 @@ def bootstrap():
     except:
         print("AN ERROR HAS OCCURRED READING THE CONFIG")
         return None
-
+    print("config read")
     # initialize the config variables
     if True:
         token = config.get("CircleCiToken")
@@ -51,11 +51,13 @@ def bootstrap():
         if not states:
             configErrorHelper("states")
             return None
+    print("config initialized")
 
     # initialize the stoplight class
     lights = Stoplight(states, gpio, fakeGpio)
-
+    print("class initialized")
     # enter the main loop
+    print("diving in to the main loop!")
     main_loop(seconds_delay=seconds_delay,
               branches=branches,
               token=token,
