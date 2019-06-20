@@ -55,8 +55,10 @@ class Stoplight:
         self.control_pin(pin, self.ON)
 
     def assert_state(self, state):
+        print("state assertion has been received")
         for key in self.states[state]:
             if self.states[state][key]:
                 self.control_pin(key, self.ON)
             else:
                 self.control_pin(key, self.OFF)
+        print("state assertion has been completed")

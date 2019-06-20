@@ -108,6 +108,7 @@ def status_to_state(statuses):
     state = ""
     # this is assuming 1, but built to support multiple
     for status_object in statuses:
+        print("printing status_object")
         print(status_object)
         status = status_object.get("status")
         if status == "success" or status == "canceled":
@@ -116,6 +117,7 @@ def status_to_state(statuses):
             state = "building"
         elif status == "failed" or status == "timedout":
             state = "broken"
+    print("state: " + state)
     return state
 
 
@@ -139,6 +141,7 @@ def main_loop(**kwargs):
 
         # print(current_statuses)
         state = status_to_state(current_statuses)
+        print("state has been received")
 
         if previous_state != state and state == "good":
             print("about to start thread")
@@ -146,6 +149,7 @@ def main_loop(**kwargs):
             lights.blink("green", 0.75, 15)
             # blink_thread.start()
         else:
+            print("state is being asserted")
             lights.assert_state(state)
         # pass statuses to the pi to handle it
         sleep(seconds_delay)
