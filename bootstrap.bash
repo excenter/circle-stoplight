@@ -1,4 +1,5 @@
 #!/bin/bash
 sleep 10s
 git pull
-python circle_ci_monitor.py
+echo "booted at $(date)" >> logs.log
+python circle_ci_monitor.py >> logs.log
