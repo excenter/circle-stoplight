@@ -5,6 +5,7 @@ import os
 from time import sleep
 from stoplight import Stoplight
 import threading
+import vox
 
 
 def configErrorHelper(missingConfig):
@@ -143,14 +144,19 @@ def main_loop(**kwargs):
         state = status_to_state(current_statuses)
         print("state has been received")
 
-        if previous_state != state and state == "good":
+        if previous_state != state:
+            if state == "good":
             print("about to start thread")
             lights.assert_state("null")
-            lights.blink("green", 0.75, 15)
+                lights.blink("green", 0.75, 5)
             # blink_thread.start()
         else:
             print("state is being asserted")
             lights.assert_state(state)
+
+            vox.play_audio_from_state(previous_state, state)
+        else:
+            print("received duplicate state")
         # pass statuses to the pi to handle it
         sleep(seconds_delay)
         previous_state = state
