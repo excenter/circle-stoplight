@@ -146,13 +146,13 @@ def main_loop(**kwargs):
 
         if previous_state != state:
             if state == "good":
-            print("about to start thread")
-            lights.assert_state("null")
+                print("about to start  thread")
+                lights.assert_state("null")
                 lights.blink("green", 0.75, 5)
-            # blink_thread.start()
-        else:
-            print("state is being asserted")
-            lights.assert_state(state)
+                # blink_thread.start()
+            else:
+                print("state is being asserted")
+                lights.assert_state(state)
 
             vox.play_audio_from_state(previous_state, state)
         else:
