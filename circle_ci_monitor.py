@@ -53,7 +53,7 @@ def bootstrap():
             configErrorHelper("states")
             return None
     print("config initialized")
-
+    vox.playPath("sounds/broken2building/turret_autosearch_4.ogg")
     # initialize the stoplight class
     lights = Stoplight(states, gpio, fakeGpio)
     print("class initialized")
@@ -162,8 +162,8 @@ def main_loop(**kwargs):
         previous_state = state
 
 
-while True:
-    try:
-        bootstrap()
-    except:
-        print("blew up, trying again")
+# while True:
+try:
+    bootstrap()
+except:
+    print("blew up, trying again")

@@ -7,10 +7,10 @@ import random
 def selectFile(old_state, new_state):
     pass
     sounds_folder = "sounds"
-    folder_path = f"{sounds_folder}/{old_state}2{new_state}"
+    folder_path = sounds_folder + "/" + old_state + "2" + new_state
     print(folder_path)
     ra = random.choice(os.listdir(folder_path))
-    return f"{folder_path}/{ra}"
+    return folder_path + "/" + ra
 
 
 def playPath(path):
@@ -26,7 +26,7 @@ def playPath(path):
 
 def play_audio_from_state(old_state, new_state):
     try:
-        print(f"received states: {old_state}, {new_state}")
+        print("received states: " + old_state + ", " + new_state)
         selected_sound = selectFile(old_state, new_state)
         print(selected_sound)
         playPath(selected_sound)
