@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # time.sleep(6)
     # print(selectFile("broken", "good"))
     # selected_sound = selectFile("broken", "xxx")
-    selected_sound = "../sounds/jeoprady.ogg"
+    selected_sound = "../sounds/error.ogg"
     playPath(selected_sound)
     time.sleep(5)
     fadeout(5000)
