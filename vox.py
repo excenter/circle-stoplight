@@ -14,16 +14,20 @@ def selectFile(old_state, new_state):
     return folder_path + "/" + ra
 
 
+def fadeout(tiem):
+    pass
+    mixer.music.fadeout(tiem)
+
+
 def playPath(path):
     print(path)
-    mixer.quit
+    mixer.quit()
     sound = VorbisFile(path)
     frequency = sound.frequency
     mixer.init(frequency=frequency)
     mixer.music.load(path)
     mixer.music.set_volume(1.0)
     mixer.music.play()
-    mixer.music.fadeout(8000)
 
     # while mixer.music.get_busy() == True:
     #     pass
@@ -45,9 +49,12 @@ if __name__ == "__main__":
     # time.sleep(6)
     # print(selectFile("broken", "good"))
     # selected_sound = selectFile("broken", "xxx")
-    selected_sound = "../sounds/wii.ogg"
+    selected_sound = "../sounds/jeoprady.ogg"
     playPath(selected_sound)
+    time.sleep(5)
+    fadeout(5000)
     time.sleep(10)
+
     # try:
     #     selected_sound = selectFile("building", "good")
     #     playPath(selected_sound)

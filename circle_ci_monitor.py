@@ -153,6 +153,8 @@ def main_loop(**kwargs):
             else:
                 print("state is being asserted")
                 lights.assert_state(state)
+            sleep(10)
+            vox.fadeout(5000)
         else:
             print("received duplicate state")
         # pass statuses to the pi to handle it
