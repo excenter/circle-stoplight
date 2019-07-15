@@ -22,8 +22,8 @@ def playPath(path):
     mixer.init(frequency=frequency)
     mixer.music.load(path)
     mixer.music.set_volume(1.0)
-    mixer.music.fadeout(5)
     mixer.music.play()
+    mixer.music.fadeout(8000)
 
     # while mixer.music.get_busy() == True:
     #     pass
@@ -45,9 +45,9 @@ if __name__ == "__main__":
     # time.sleep(6)
     # print(selectFile("broken", "good"))
     # selected_sound = selectFile("broken", "xxx")
-    # selected_sound = "../sounds/wii.ogg"
-    # playPath(selected_sound)
-    # time.sleep(30)
+    selected_sound = "../sounds/wii.ogg"
+    playPath(selected_sound)
+    time.sleep(10)
     # try:
     #     selected_sound = selectFile("building", "good")
     #     playPath(selected_sound)
@@ -57,13 +57,13 @@ if __name__ == "__main__":
     #     print("failed to play audio")
     # play_audio_from_state("building", "good")
     # time.sleep(10)
-    states = ["building", "broken", "good"]
-    old_state = random.choice(states)
-    while True:
-        state = random.choice(states)
-        if old_state != state:
-            play_audio_from_state(old_state, state)
-        else:
-            print("duplicate")
-        old_state = state
-        time.sleep(2)
+    # states = ["building", "broken", "good"]
+    # old_state = random.choice(states)
+    # while True:
+    #     state = random.choice(states)
+    #     if old_state != state:
+    #         play_audio_from_state(old_state, state)
+    #     else:
+    #         print("duplicate")
+    #     old_state = state
+    #     time.sleep(2)
