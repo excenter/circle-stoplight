@@ -1,6 +1,7 @@
 from pygame import mixer
 import time
 import os
+from pyogg import VorbisFile
 import random
 
 
@@ -15,9 +16,13 @@ def selectFile(old_state, new_state):
 
 def playPath(path):
     print(path)
-    mixer.init()
+    mixer.quit
+    sound = VorbisFile(path)
+    frequency = sound.frequency
+    mixer.init(frequency=frequency)
     mixer.music.load(path)
     mixer.music.set_volume(1.0)
+    mixer.music.fadeout(60)
     mixer.music.play()
 
     # while mixer.music.get_busy() == True:
@@ -40,8 +45,9 @@ if __name__ == "__main__":
     # time.sleep(6)
     # print(selectFile("broken", "good"))
     # selected_sound = selectFile("broken", "xxx")
+    # selected_sound = "../sounds/wii.ogg"
     # playPath(selected_sound)
-    # time.sleep(6)
+    # time.sleep(30)
     # try:
     #     selected_sound = selectFile("building", "good")
     #     playPath(selected_sound)
@@ -49,8 +55,8 @@ if __name__ == "__main__":
 
     # except:
     #     print("failed to play audio")
-    # play_audio_from_state("building", "broken")
-    # time.sleep(3)
+    # play_audio_from_state("building", "good")
+    # time.sleep(10)
     states = ["building", "broken", "good"]
     old_state = random.choice(states)
     while True:

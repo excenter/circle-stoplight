@@ -12,6 +12,7 @@ autopep8 = "*"
 requests = "*"
 gpiozero = "*"
 pygame = "*"
+pyogg = "*"
 
 [requires]
 python_version = "3.7"
