@@ -22,7 +22,7 @@ def playPath(path):
     mixer.init(frequency=frequency)
     mixer.music.load(path)
     mixer.music.set_volume(1.0)
-    mixer.music.fadeout(15)
+    mixer.music.fadeout(5)
     mixer.music.play()
 
     # while mixer.music.get_busy() == True:
