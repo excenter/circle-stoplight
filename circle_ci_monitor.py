@@ -144,6 +144,7 @@ def main_loop(**kwargs):
         print("state has been received")
 
         if previous_state != state:
+            vox.play_audio_from_state(previous_state, state)
             if state == "good":
                 print("about to start  thread")
                 lights.assert_state("null")
@@ -152,8 +153,6 @@ def main_loop(**kwargs):
             else:
                 print("state is being asserted")
                 lights.assert_state(state)
-
-            vox.play_audio_from_state(previous_state, state)
         else:
             print("received duplicate state")
         # pass statuses to the pi to handle it
