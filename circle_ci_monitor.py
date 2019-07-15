@@ -162,8 +162,5 @@ def main_loop(**kwargs):
         previous_state = state
 
 
-# while True:
-try:
+if __name__ == "__main__":
     bootstrap()
-except:
-    print("blew up, trying again")
