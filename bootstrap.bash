@@ -1,4 +1,4 @@
 #!/bin/bash
-git -C /home/pi/circle-stoplight pull
+git pull
 echo "booted at $(date)"
-/home/pi/.pyenv/shims/python /home/pi/circle-stoplight/circle_ci_monitor.py
+/home/pi/.pyenv/shims/python circle_ci_monitor.py 

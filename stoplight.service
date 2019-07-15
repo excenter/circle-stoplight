@@ -1,0 +1,12 @@
+[Unit]
+Description=Run the IOT stoplight
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/circle-stoplight
+ExecStart=/bin/bash /home/pi/circle-stoplight/bootstrap.bash
+Restart=on-failure
+
+[Install]
+WantedBy=network.target
