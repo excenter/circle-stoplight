@@ -115,7 +115,7 @@ def status_to_state(statuses):
             state = "good"
         elif status == "running" or status == "queued" or status == "not_running":
             state = "building"
-        elif status == "failed" or status == "timedout":
+        elif status == "failed" or status == "timedout" or status == "failing":
             state = "broken"
     print("state: " + state)
     return state
