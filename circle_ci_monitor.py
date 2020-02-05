@@ -113,9 +113,9 @@ def status_to_state(statuses):
         status = status_object.get("status")
         if status == "success" or status == "canceled":
             state = "good"
-        elif status == "running" or status == "queued" or status == "not_running":
+        elif status == "running" or status == "queued" or status == "not_running" or status == "failing":
             state = "building"
-        elif status == "failed" or status == "timedout" or status == "failing":
+        elif status == "failed" or status == "timedout":
             state = "broken"
     print("state: " + state)
     return state
